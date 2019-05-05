@@ -29,6 +29,7 @@ INSERT INTO `schema`  (vseq, ctime) VALUES ('107', now());
 CREATE TABLE event  ( sid 	  INT 	   UNSIGNED NOT NULL,
                       cid 	  INT 	   UNSIGNED NOT NULL,
                       signature   INT      UNSIGNED NOT NULL, 
+                      ip_src      INT      UNSIGNED NOT NULL,
                       timestamp 	   DATETIME NOT NULL,
                       PRIMARY KEY (sid,cid),
                       INDEX       sig (signature),
