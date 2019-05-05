@@ -1900,11 +1900,12 @@ int dbProcessEventInformation(DatabaseData *data,Packet *p,
     GenericEVENTQUERYJMP:
 	if( (SnortSnprintf(SQLQueryPtr, MAX_QUERY_LENGTH,
 			   "INSERT INTO "
-			   "event (sid,cid,signature,timestamp) "
-			   "VALUES (%u, %u, %u, '%s');",
+			   "event (sid,cid,signature,ip_src,timestamp) "
+			   "VALUES (%u, %u, %u, %lu, '%s');",
 			   data->sid, 
 			   data->cid, 
-			   i_sig_id, 
+			   i_sig_id,
+			   (u_long)ntohl(p->iph->ip_src.s_addr),
 			   data->timestampHolder)) != SNORT_SNPRINTF_SUCCESS)
 	{
 	    goto bad_query;
