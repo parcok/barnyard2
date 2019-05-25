@@ -4357,8 +4357,9 @@ void Disconnect(DatabaseData * data)
 	
 	if(data->m_sock)
 	{
-	    mysql_close(data->m_sock);
-	    data->m_sock = NULL;
+	    //mysql_close(data->m_sock);
+	    //data->m_sock = NULL;
+	    LogMessage("This is when it usually closes");
 	}
 
 
