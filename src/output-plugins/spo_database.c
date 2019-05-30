@@ -2295,6 +2295,7 @@ TransacRollback:
 		    
 	    if (Insert(CurrentQuery,data,1))
 	    {
+		LogMessage("Loop failure 1.");
 		setTransactionCallFail(&data->dbRH[data->dbtype_id]);
 		ErrorMessage("[%s()]: Insertion of Query [%s] failed\n",
 			     __FUNCTION__,
@@ -2325,7 +2326,7 @@ TransacRollback:
     
     /* Increment the cid*/
     data->cid++;
-    //LogMessage("Inserted a new event \n");
+    LogMessage("Inserted a new event \n");
     /* Normal Exit Path */
 
     return;
@@ -2347,6 +2348,7 @@ bad_query:
 			   __FUNCTION__);
             }
 	    
+	    LogMessge("Loop failure 2.");
 	    LogMessage("WARNING database: Failed Query Position [%d] Failed Query Body [%s] \n",
 		       itr+1,
 		       CurrentQuery);
@@ -2361,6 +2363,7 @@ bad_query:
     
     if( checkTransactionCall(&data->dbRH[data->dbtype_id]))
     {
+	LogMessage("Going to rollback the transaction now.");
 	goto TransacRollback;
     }
 
