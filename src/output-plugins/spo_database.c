@@ -3467,8 +3467,10 @@ int Insert(char * query, DatabaseData * data,u_int32_t inTransac)
 	{
 	    /* A This shouldn't happen since we are in failed transaction state */
 	    /* XXX */
+	    LogMessage("Failure 6.\n");
 	    return 1;
-	}
+	} else {
+            LogMessage("Failure 5.\n");
     }
     
     if( (data->dbRH[data->dbtype_id].dbConnectionStatus(&data->dbRH[data->dbtype_id])))
