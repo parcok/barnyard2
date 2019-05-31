@@ -2501,6 +2501,8 @@ TransacRollback:
     if(checkTransactionState(&data->dbRH[data->dbtype_id]) && 
        checkTransactionCall(&data->dbRH[data->dbtype_id]))
     {
+	/* If this is 1 then it exits, 0 will reset.
+	A 1 is returned if it hits maximum errors.*/
 	if(RollbackTransaction(data))
 	{
 	    /* XXX */
@@ -3356,9 +3358,10 @@ u_int32_t RollbackTransaction(DatabaseData * data)
                    __FUNCTION__);
     }
 
-    if(data->dbRH[data->dbtype_id].transactionErrorCount > data->dbRH[data->dbtype_id].transactionErrorThreshold)
+    if(data->dbRH[data->dbtype_id].transactionErrorCount < -1)
     {
 	/* XXX */
+	LogMessage("This should never happen as it is checking < -1.\n");
 	LogMessage("[%s(): Call failed, we reached the maximum number of transaction error [%u] \n",
 		   __FUNCTION__,
 		   data->dbRH[data->dbtype_id].transactionErrorThreshold);
@@ -3469,8 +3472,6 @@ int Insert(char * query, DatabaseData * data,u_int32_t inTransac)
 	    /* XXX */
 	    LogMessage("Failure 6.\n");
 	    return 1;
-	} else {
-            LogMessage("Failure 5.\n");
 	}
     }
     
@@ -4363,9 +4364,9 @@ void Disconnect(DatabaseData * data)
 	
 	if(data->m_sock)
 	{
-	    //mysql_close(data->m_sock);
-	    //data->m_sock = NULL;
-	    LogMessage("This is when it usually closes");
+	    /*mysql_close(data->m_sock);
+	    data->m_sock = NULL;*/
+	    LogMessage("This is when it usually closes.\n");
 	}
 
 
