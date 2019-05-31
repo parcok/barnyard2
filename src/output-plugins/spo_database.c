@@ -3471,6 +3471,7 @@ int Insert(char * query, DatabaseData * data,u_int32_t inTransac)
 	    return 1;
 	} else {
             LogMessage("Failure 5.\n");
+	}
     }
     
     if( (data->dbRH[data->dbtype_id].dbConnectionStatus(&data->dbRH[data->dbtype_id])))
