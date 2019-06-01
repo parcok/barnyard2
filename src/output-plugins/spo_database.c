@@ -2580,7 +2580,7 @@ TransacRollback:
     
     /* Increment the cid*/
     data->cid++;
-    LogMessage("Inserted a new event \n");
+    //LogMessage("Inserted a new event \n");
     /* Normal Exit Path */
 
     return;
@@ -2588,7 +2588,7 @@ TransacRollback:
 bad_query:
     if( (SQLMaxQuery = SQL_GetMaxQuery(data)))
     {
-	LogMessage("Failure 3.\n");
+	//LogMessage("Failure 3.\n");
 	LogMessage("WARNING database: [%s()] Failed transaction with current query transaction \n ",
 		   __FUNCTION__);
 	
@@ -2617,7 +2617,7 @@ bad_query:
     
     if( checkTransactionCall(&data->dbRH[data->dbtype_id]))
     {
-	LogMessage("Going to rollback now.\n");
+	//LogMessage("Going to rollback now.\n");
 	goto TransacRollback;
     }
 
@@ -3470,7 +3470,7 @@ int Insert(char * query, DatabaseData * data,u_int32_t inTransac)
 	{
 	    /* A This shouldn't happen since we are in failed transaction state */
 	    /* XXX */
-	    LogMessage("Failure 6.\n");
+	    //LogMessage("Failure 6.\n");
 	    return 1;
 	}
     }
@@ -4366,7 +4366,7 @@ void Disconnect(DatabaseData * data)
 	{
 	    /*mysql_close(data->m_sock);
 	    data->m_sock = NULL;*/
-	    LogMessage("This is when it usually closes.\n");
+	    LogMessage("This is when it usually closes. Should never get here either.\n");
 	}
 
 
